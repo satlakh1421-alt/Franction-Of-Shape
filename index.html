@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Fraction Lab: Shape Shifter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-wrapper" id="game-container">
+
+  <!-- TOP-BAR CONTROLS (FULLSCREEN & SOUND TOGGLE) -->
+  <div class="top-controls">
+    <button class="icon-btn" id="btn-fullscreen-toggle" aria-label="Toggle Fullscreen" title="Full Screen (F11 / Tap)">
+      <span id="fullscreen-icon">⛶</span>
+    </button>
+    <button class="icon-btn" id="btn-sound-toggle" aria-label="Toggle Sound" title="Sound On/Off">
+      <span id="sound-icon">🔊</span>
+    </button>
+  </div>
+
+  <!-- SCREEN 1: START PAGE -->
+  <section class="screen active" id="screen-start">
+    <div class="screen-card start-card">
+      <div class="badge-pill">Cambridge Maths • Stage 1-2</div>
+      <h1 class="game-title">Fraction Lab<br><span class="gradient-text">Shape Shifter</span></h1>
+      <p class="game-subtitle">Estimate and round fractions of magic shapes & potions!</p>
+
+      <div class="mascot-preview">
+        <canvas id="canvas-start-preview" width="220" height="150"></canvas>
+      </div>
+
+      <div class="menu-btn-group">
+        <button class="game-btn btn-primary" id="btn-play">
+          <span class="btn-icon">▶</span> Play Game
+        </button>
+        <button class="game-btn btn-secondary" id="btn-instructions">
+          <span class="btn-icon">💡</span> How to Play
+        </button>
+      </div>
+
+      <div class="start-features">
+        <span>⏱️ Fast-Paced</span>
+        <span>✨ 3 Stars Rating</span>
+        <span>📱 Touch & Tablet Ready</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: VISUAL INSTRUCTIONS PAGE -->
+  <section class="screen" id="screen-instructions">
+    <div class="screen-card instructions-card">
+      <div class="card-header">
+        <h2>How to Play</h2>
+        <p class="sub-hint">Quick visual guide — No long text!</p>
+      </div>
+
+      <!-- VISUAL STEP-BY-STEP CARDS -->
+      <div class="instruction-grid">
+        <div class="instruction-card">
+          <div class="step-badge">Step 1</div>
+          <div class="instruction-visual">
+            <svg viewBox="0 0 120 90" class="step-svg">
+              <!-- Flask with 1/2 fill -->
+              <path d="M 45 15 L 45 35 L 25 75 A 10 10 0 0 0 35 85 L 85 85 A 10 10 0 0 0 95 75 L 75 35 L 75 15 Z" fill="rgba(255,255,255,0.08)" stroke="#38bdf8" stroke-width="3"/>
+              <!-- Liquid half -->
+              <path d="M 33 60 Q 60 55 87 60 L 85 85 L 35 85 Z" fill="#38bdf8" opacity="0.85"/>
+              <!-- Eye / Inspect icon -->
+              <circle cx="95" cy="25" r="14" fill="#6366f1"/>
+              <text x="95" y="30" font-size="14" text-anchor="middle" fill="#fff">👁️</text>
+            </svg>
+          </div>
+          <h3>1. Look at the Shape</h3>
+          <p>See how much is shaded or filled with glowing liquid.</p>
+        </div>
+
+        <div class="instruction-card">
+          <div class="step-badge">Step 2</div>
+          <div class="instruction-visual">
+            <svg viewBox="0 0 120 90" class="step-svg">
+              <!-- Benchmark Ruler -->
+              <line x1="15" y1="50" x2="105" y2="50" stroke="#94a3b8" stroke-width="3"/>
+              <!-- Ticks -->
+              <line x1="15" y1="40" x2="15" y2="60" stroke="#f43f5e" stroke-width="3"/>
+              <text x="15" y="32" font-size="11" text-anchor="middle" fill="#f43f5e" font-weight="bold">0</text>
+
+              <line x1="45" y1="42" x2="45" y2="58" stroke="#f59e0b" stroke-width="3"/>
+              <text x="45" y="32" font-size="11" text-anchor="middle" fill="#f59e0b" font-weight="bold">¼</text>
+
+              <line x1="60" y1="38" x2="60" y2="62" stroke="#10b981" stroke-width="4"/>
+              <text x="60" y="30" font-size="12" text-anchor="middle" fill="#10b981" font-weight="bold">½</text>
+
+              <line x1="75" y1="42" x2="75" y2="58" stroke="#06b6d4" stroke-width="3"/>
+              <text x="75" y="32" font-size="11" text-anchor="middle" fill="#06b6d4" font-weight="bold">¾</text>
+
+              <line x1="105" y1="40" x2="105" y2="60" stroke="#8b5cf6" stroke-width="3"/>
+              <text x="105" y="32" font-size="11" text-anchor="middle" fill="#8b5cf6" font-weight="bold">1</text>
+
+              <!-- Estimation Marker -->
+              <circle cx="60" cy="74" r="5" fill="#fbbf24"/>
+              <line x1="60" y1="74" x2="60" y2="64" stroke="#fbbf24" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>2. Estimate & Round</h3>
+          <p>Find the closest benchmark: <strong>0, ¼, ½, ¾, or 1 Whole</strong>.</p>
+        </div>
+
+        <div class="instruction-card">
+          <div class="step-badge">Step 3</div>
+          <div class="instruction-visual">
+            <svg viewBox="0 0 120 90" class="step-svg">
+              <!-- Tap button demo -->
+              <rect x="25" y="25" width="70" height="36" rx="8" fill="#10b981" stroke="#34d399" stroke-width="2"/>
+              <text x="60" y="48" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="bold">½</text>
+              <!-- Finger Pointer -->
+              <g transform="translate(68, 48)">
+                <circle cx="15" cy="15" r="12" fill="rgba(255,255,255,0.2)"/>
+                <text x="15" y="22" font-size="18" text-anchor="middle">👆</text>
+              </g>
+            </svg>
+          </div>
+          <h3>3. Tap or Drag to Fill</h3>
+          <p>Tap your answer or drag the slider to earn points & stars!</p>
+        </div>
+      </div>
+
+      <div class="instructions-actions">
+        <button class="game-btn btn-primary" id="btn-start-from-instructions">
+          <span class="btn-icon">🚀</span> Start Playing!
+        </button>
+        <button class="game-btn btn-subtle" id="btn-back-to-menu">
+          Back
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: 3-2-1 COUNTDOWN OVERLAY -->
+  <section class="screen" id="screen-countdown">
+    <div class="countdown-container">
+      <div class="countdown-circle">
+        <span class="countdown-num" id="countdown-number">3</span>
+      </div>
+      <p class="countdown-label">Get Ready!</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 4: MAIN GAME SCREEN -->
+  <section class="screen" id="screen-game">
+    <!-- HUD BAR -->
+    <header class="game-hud">
+      <div class="hud-item hud-level">
+        <span class="hud-label">LEVEL</span>
+        <span class="hud-val" id="hud-level-text">1/4</span>
+      </div>
+
+      <div class="hud-item hud-timer">
+        <span class="hud-icon">⏱️</span>
+        <span class="hud-val" id="hud-timer">60s</span>
+      </div>
+
+      <div class="hud-item hud-score">
+        <span class="hud-label">SCORE</span>
+        <span class="hud-val" id="hud-score">0</span>
+      </div>
+
+      <div class="hud-item hud-lives" id="hud-lives" aria-label="Lives">
+        <span class="heart active">❤️</span>
+        <span class="heart active">❤️</span>
+        <span class="heart active">❤️</span>
+      </div>
+
+      <button class="icon-btn-sm" id="btn-restart-hud" title="Restart Game" aria-label="Restart">
+        🔄
+      </button>
+    </header>
+
+    <!-- LEVEL NOTIFICATION BANNER -->
+    <div class="level-banner" id="level-banner">
+      <span id="level-banner-text">Level 1: Halves & Wholes!</span>
+    </div>
+
+    <!-- MAIN INTERACTIVE PLAY AREA -->
+    <div class="play-zone">
+      <!-- QUESTION PROMPT -->
+      <div class="question-header">
+        <div class="target-badge" id="question-badge">Benchmark Estimation</div>
+        <h2 class="question-title" id="question-text">What fraction of this shape is shaded?</h2>
+      </div>
+
+      <!-- CANVAS STAGE -->
+      <div class="canvas-wrapper">
+        <canvas id="game-canvas" width="560" height="280"></canvas>
+        <div class="floating-feedback-layer" id="feedback-layer"></div>
+      </div>
+
+      <!-- INTERACTIVE CONTROLS (CHOICE BUTTONS OR SLIDER) -->
+      <div class="controls-container">
+        <!-- MODE A: FRACTION CHOICE BUTTONS (DEFAULT) -->
+        <div class="choice-btn-grid" id="choice-buttons-grid">
+          <!-- Dynamically populated 4 buttons -->
+        </div>
+
+        <!-- MODE B: INTERACTIVE POUR / SLIDER DRAGGER (LEVEL 3) -->
+        <div class="slider-control-zone" id="slider-control-zone" style="display: none;">
+          <div class="slider-label-row">
+            <span>0 (Empty)</span>
+            <span class="slider-current-val" id="slider-val-indicator">50% (½)</span>
+            <span>1 (Full)</span>
+          </div>
+          <div class="slider-bar-track" id="slider-track">
+            <div class="slider-bar-fill" id="slider-fill" style="width: 50%;"></div>
+            <div class="slider-thumb" id="slider-thumb" style="left: 50%;">
+              <span class="thumb-grip">|||</span>
+            </div>
+            <!-- Benchmark markers on slider -->
+            <div class="slider-tick" style="left: 25%;"><span class="tick-label">¼</span></div>
+            <div class="slider-tick" style="left: 50%;"><span class="tick-label">½</span></div>
+            <div class="slider-tick" style="left: 75%;"><span class="tick-label">¾</span></div>
+          </div>
+          <button class="game-btn btn-primary btn-confirm-pour" id="btn-submit-pour">
+            ✨ Pour Liquid & Confirm!
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WRONG ANSWER MICRO-EXPLANATION OVERLAY (Paused, safe to read) -->
+    <div class="explanation-overlay" id="explanation-overlay">
+      <div class="explanation-box">
+        <div class="explanation-icon" id="explanation-icon">💡</div>
+        <h3 id="explanation-title">Let's check!</h3>
+        <p id="explanation-text">This shape is about half filled.</p>
+        <div class="explanation-visual-hint" id="explanation-visual"></div>
+        <button class="game-btn btn-primary" id="btn-dismiss-explanation">
+          Got It! Continue ➔
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 5: END GAME / RESULTS MODAL -->
+  <section class="screen" id="screen-result">
+    <div class="screen-card result-card">
+      <div class="result-header">
+        <div class="trophy-bounce" id="result-trophy">🏆</div>
+        <h2 id="result-title">Great Job!</h2>
+        <p class="result-subtitle" id="result-message">You are a Fraction Master!</p>
+      </div>
+
+      <!-- STARS DISPLAY -->
+      <div class="stars-row" id="result-stars">
+        <div class="star-slot" id="star-1"><span class="star-icon">★</span></div>
+        <div class="star-slot" id="star-2"><span class="star-icon">★</span></div>
+        <div class="star-slot" id="star-3"><span class="star-icon">★</span></div>
+      </div>
+
+      <!-- SCORE STATS BREAKDOWN -->
+      <div class="stats-summary-grid">
+        <div class="stat-box">
+          <span class="stat-label">Final Score</span>
+          <span class="stat-number" id="result-score-val">0</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Accuracy</span>
+          <span class="stat-number" id="result-accuracy-val">100%</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Best Streak</span>
+          <span class="stat-number" id="result-streak-val">0 🔥</span>
+        </div>
+      </div>
+
+      <!-- ACTION BUTTONS: TRY AGAIN & SUBMIT -->
+      <div class="result-btn-row">
+        <button class="game-btn btn-secondary" id="btn-try-again">
+          <span class="btn-icon">🔄</span> Try Again
+        </button>
+        <button class="game-btn btn-primary" id="btn-submit-score">
+          <span class="btn-icon">✅</span> Submit
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
